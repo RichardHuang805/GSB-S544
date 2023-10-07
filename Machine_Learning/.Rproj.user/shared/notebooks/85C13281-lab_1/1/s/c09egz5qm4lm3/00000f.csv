@@ -1,0 +1,3 @@
+"0","    q1_bubble = pd.DataFrame(q1_data)"
+"0","    q1_bubble = q1_bubble.dropna()"
+"0",""

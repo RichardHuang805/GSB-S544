@@ -1,0 +1,214 @@
+---
+title: "Machine Learning Lab 1"
+format: html
+editor: visual
+output: html_document
+theme: darkly
+self-contained: true
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{python}
+import numpy as np
+import pandas as pd
+import plotnine as p9
+```
+
+Task 1
+
+1.  Identify, and list here, what aesthetics are being used and which variables are being mapped to each aesthetic.
+
+    Y-axis is Life expectancy, X-axis is Income. Each bubble represents a country. The difference of the color of the bubble is telling us which continent is the country at. The bigger the bubble is, the more population that country has.
+
+2.  Import the `q1data.csv` dataset.
+
+    ```{python}
+    q1_data = pd.read_csv('/Users/richardhuang/Desktop/GSB-S544/Machine_Learning/q1data.csv')
+    ```
+
+3.  Recreate the plot as best you can using `plotnine`.
+
+    ```{python}
+    q1_bubble = pd.DataFrame(q1_data)
+    q1_bubble = q1_bubble.dropna()
+    ```
+
+    ```{python}
+    import pandas as pd
+    from plotnine import *
+
+    log_income = np.log2(q1_bubble['income'])
+    x_axis_breaks = np.log2([500,1000,2000,4000,8000,16000,32000,64000,128000])
+
+    bubble_plot = (
+        ggplot(q1_bubble, aes(x='log_income', y='life_exp', size='population', color =   'four_regions')) +
+        annotate("text",x=13,y=42,label='2010',size=100,alpha=.073)+
+        geom_point(alpha=.6) +
+        scale_size(range=[1, 8]) +  
+        labs( x='Income', y='Life Expectancy') +  
+        scale_color_manual(values = {'asia': 'red', 'africa': 'blue', 'europe': 'yellow', 'americas': 'green'})+
+        scale_x_continuous(breaks=x_axis_breaks,
+        labels=['500', '1000', '2000','4000','8000', '16k','32k','64k','128k']) +
+        scale_y_continuous(limits=[8,95 ], breaks=[10, 20, 30,40,50,60,70,80,90], labels=['10', '20', '30','40','50','60','70','80','90'])  +
+        theme(figure_size=(10,4.5))
+    )
+    print(bubble_plot)
+    ```
+
+    ```         
+    ```
+
+4.  What other geometries could you use here besides `geom_point`? Provide an actual plot of another geometry being used here and why it's good or bad for visualizing these data.
+
+    ```{python}
+    gg = (ggplot(q1_bubble, aes(x='log_income', y='life_exp', color='four_regions')) + 
+         geom_bar(stat='identity', position='dodge') + 
+         scale_color_manual(values = {'asia': 'red', 'africa': 'blue', 'europe': 'yellow', 'americas': 'green'})+
+         labs(title='Grouped Bar Chart', x='log_income', y='life_exp'))
+    print(gg)
+    ```
+
+    This is a bar chart with each individual country being a bar. Actually I think this graph looks really good, it gives you a pretty clear message that with higher income, life expectancy gets higher as well. With the different color assigned based on regions, it also gives you a message that lower income countries are mostly in Africa, while higher income countries are mostly in Europe. Compared with the bubble plot, certainly the biggest downside is that this bar chart is missing the ability to tell people information about the population which is a key message. But other than that, I think this is a pretty good graph.
+
+Task 2
+
+1.  Identify, and list here, what aesthetics are being used and which variables are being mapped to each aesthetic.
+
+    X-axis is exports, Y-axis is imports. Bubble size is population again and bubble color is continent.
+
+2.  Import the `q2data.csv` dataset.
+
+    ```{python}
+    q2_data = pd.read_csv('/Users/richardhuang/Desktop/GSB-S544/Machine_Learning/q2data.csv')
+
+    ```
+
+3.  Recreate the plot as best you can using `plotnine`.
+
+    ```{python}
+    import pandas as pd
+
+    q2_bubble = q2_data.dropna()
+    df_q2_bubble = pd.DataFrame(q2_bubble)
+
+    for i in df_q2_bubble["energy"]:
+        if "k" in i:
+            df_q2_bubble.loc[df_q2_bubble["energy"] == i, "energy"] = float(i[:-1]) * 1000
+
+    ```
+
+    ```{python}
+    df_q2_bubble['energy'] = df_q2_bubble['energy'].astype(float)
+    ```
+
+    ```{python}
+    import pandas as pd
+    from plotnine import *
+
+    log_income = np.log2(q1_bubble['income'])
+    x_axis_breaks = np.log2([500,1000,2000,4000,8000,16000,32000,64000,128000])
+
+
+
+    bubble_plot = (
+        ggplot(df_q2_bubble, aes(x='exports', y='imports', size='energy', color =   'four_regions')) +
+        annotate("text",x=113,y=170,label='1997',size=130,alpha=.073)+
+        geom_point(alpha=.6) +
+        scale_size(range=[1, 8]) +  
+        labs( x='Exports(\% of GDP)', y='Imports(\% of GDP)') +  
+        scale_color_manual(values = {'asia': 'red', 'africa': 'blue', 'europe': 'yellow', 'americas': 'green'})+
+        scale_x_continuous(limits=[0,230],breaks=[20,40,60,80,100,120,140,160,180,200,220],
+        labels=['20','40','60','80','100','120','140','160','180','200','220']) +
+        scale_y_continuous(limits=[0,420], breaks=[50, 100, 150, 200,250,300,350,400], labels=['50', '100', '150', '200','250','300','350','400'])+
+        theme(figure_size=(10,4.5))
+    )
+
+    print(bubble_plot)
+    ```
+
+4.  What other geometries could you use here besides `geom_point`? Provide an actual plot of another geometry being used here and why it's good or bad for visualizing these data.
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+fig, axs = plt.subplots(2, 1, figsize=(7, 7))
+
+sns.histplot(data=df_q2_bubble, x="energy", y ='imports', kde=True, hue ='four_regions', ax=axs[0])
+sns.histplot(data=df_q2_bubble, x="energy", y='exports',kde=True, hue='four_regions', ax=axs[1])
+
+
+plt.tight_layout()
+
+plt.show()
+```
+
+Supposedly I created a side-by-side histogram, but I thought histogram supposed to be a straight bar. However, in my graphs, they appeared to be bunch of small boxes which are representing all the individual countries, with different color representing different continents like the bubble chart. However, with a side-by-side comparison, we can examine the pattern of imports versus exports better. From the graph, we can tell that the two are rather similar with minor differences. This is telling us that countries with higher imports will have a higher exports, and certainly lower imports will have a lower imports. The two variables follow the same pattern when we compare it with energy. I think the bubble graph is better at telling people about all the attributes within a single country, because you can analyze the individual bubble by its location in the graph and its size. My graph on the other hand, can tell people information about the relationship of the patterns of imports versus exports better.
+
+Task 3
+
+1.  Identify, and list here, what aesthetics are being used and which variables are being mapped to each aesthetic.
+
+    X-axis is internet_users, Y-axis is GDP. Bubble size is income and color of it is continent.
+
+2.  Import the `q3data.csv` dataset.
+
+    ```{python}
+    q3_data = pd.read_csv('/Users/richardhuang/Desktop/GSB-S544/Machine_Learning/q3data.csv')
+    ```
+
+3.  Recreate the plot as best you can using `plotnine`.
+
+    ```{python}
+    q3_bubble = q3_data.dropna()
+
+    import pandas as pd
+    from plotnine import *
+
+    log_gdp = np.log(q3_bubble['gdp'])
+    y_axis_breaks = np.log([200,500,1000,2000,5000,10000,20000,50000,100000])
+
+    bubble_plot = (
+        ggplot(q3_bubble, aes(x='internet_users', y='log_gdp', size='income', color =   'four_regions')) +
+        annotate("text",x=45,y=7,label='2001',size=140,alpha=.073)+
+        geom_point(alpha=.4) +
+        scale_size(range=[1, 8]) +  
+        labs( x='Individual using the Internet', y='GDP/capita') +  
+        scale_color_manual(values = {'asia': 'red', 'africa': 'blue', 'europe': 'yellow', 'americas': 'green'})+
+        scale_x_continuous(limits=[0,90], breaks=[10, 20,30,40,50,60,70,80,90], labels=['10', '20','30','40','50','60','70','80','90']) +
+        scale_y_continuous(limits=[0,12],breaks=y_axis_breaks,
+        labels=['200','500','1000','2000','5000','10k','20k','50k','100k'], trans = "log")+
+        theme(figure_size=(10,4.5))
+    )
+
+    print(bubble_plot)
+    ```
+
+4.  What other geometries could you use here besides `geom_point`? Provide an actual plot of another geometry being used here and why it's good or bad for visualizing these data.
+
+```{python}
+
+gg=(ggplot(q3_bubble, aes(x = "internet_users", y = "gdp", fill = "four_regions"))
++ geom_boxplot()
+)
+
+print(gg)
+```
+
+This is a box plot by using internet_users as x and gdp as y, categorized by the four different regions. This graph is able to present a very clear visual on the comparison among these four different regions, while also telling us the relationship between gdp and internet_users. From this graph, we can tell Europe is clearly a leader in both gdp and internet users, while Africa is in the bottom. Americas and Asian don't have a clear difference in gdp but America leads in internet users. Another information you can tell from this graph but not the bubble graph is that you can tell the median from the box plot very easily. In many cases, the median is a very good representation of a group of variables. A major disadvantage from the box plot compared with the bubble graph is that it is missing a dimension of the variables, income. We cannot tell how income is playing a role in the relationship between gdp and internet_users. Also, from the bubble graph, you can examine individual country attributes while the box plot is presenting us information from a group aspect.
+
+The `echo: false` option disables the printing of code (only output is displayed).
