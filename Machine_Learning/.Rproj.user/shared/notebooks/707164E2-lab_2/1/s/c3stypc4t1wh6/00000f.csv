@@ -1,0 +1,18 @@
+"0","top_five_city = myData[myData['geography'].isin(['Los Angeles', 'New York', 'Dallas/Ft. Worth', 'Houston', 'Phoenix/Tucson'])]"
+"0",""
+"0","top_five_city"
+"1","             date  average_price  total_volume  ...         geography  month  day
+22     2015-01-04           0.74    1086363.97  ...  Dallas/Ft. Worth     01   04
+23     2015-01-04           1.35       9895.96  ...  Dallas/Ft. Worth     01   04
+36     2015-01-04           0.71    1062990.62  ...           Houston     01   04
+37     2015-01-04           1.22       8938.32  ...           Houston     01   04
+44     2015-01-04           0.85    2682159.95  ...       Los Angeles     01   04
+...           ...            ...           ...  ...               ...    ...  ...
+32982  2020-11-29           1.74     135939.83  ...       Los Angeles     11   29
+32993  2020-11-29           1.07    1907738.81  ...          New York     11   29
+32994  2020-11-29           1.73      69523.99  ...          New York     11   29
+33003  2020-11-29           0.76     936684.60  ...    Phoenix/Tucson     11   29
+33004  2020-11-29           1.30      24377.24  ...    Phoenix/Tucson     11   29
+
+[3060 rows x 15 columns]
+"

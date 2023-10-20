@@ -1,0 +1,17 @@
+"0","Cali = California.groupby(['type', 'geography','4770','4225','4046'])['average_price'].sum().reset_index()"
+"0","Cali"
+"1","              type      geography  ...        4046  average_price
+0     conventional    Los Angeles  ...  1409249.49            0.0
+1     conventional    Los Angeles  ...   768315.72            1.0
+2     conventional    Los Angeles  ...   847807.44            1.0
+3     conventional    Los Angeles  ...  1217417.81            0.0
+4     conventional    Los Angeles  ...   865743.41            1.0
+...            ...            ...  ...         ...            ...
+2435       organic  San Francisco  ...    15960.40            2.0
+2436       organic  San Francisco  ...    15236.95            2.0
+2437       organic  San Francisco  ...     4029.00            1.0
+2438       organic  San Francisco  ...    13329.09            2.0
+2439       organic  San Francisco  ...    10931.42            1.0
+
+[2440 rows x 6 columns]
+"

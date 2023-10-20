@@ -1,0 +1,19 @@
+"0","myData[['year', 'month', 'day']] = myData['date'].str.split('-', n=2, expand=True)"
+"0",""
+"0",""
+"0","myData"
+"1","             date  average_price  total_volume  ...             geography  month  day
+0      2015-01-04           1.22      40873.28  ...                Albany     01   04
+1      2015-01-04           1.79       1373.95  ...                Albany     01   04
+2      2015-01-04           1.00     435021.49  ...               Atlanta     01   04
+3      2015-01-04           1.76       3846.69  ...               Atlanta     01   04
+4      2015-01-04           1.08     788025.06  ...  Baltimore/Washington     01   04
+...           ...            ...           ...  ...                   ...    ...  ...
+33040  2020-11-29           1.47    1583056.27  ...            Total U.S.     11   29
+33041  2020-11-29           0.91    5811114.22  ...                  West     11   29
+33042  2020-11-29           1.48     289961.27  ...                  West     11   29
+33043  2020-11-29           0.67     822818.75  ...   West Tex/New Mexico     11   29
+33044  2020-11-29           1.35      24106.58  ...   West Tex/New Mexico     11   29
+
+[33045 rows x 15 columns]
+"

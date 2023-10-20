@@ -1,0 +1,2 @@
+"0","pWage <- predict(Quad_model, data.frame(Educ = 16, Age = 20:80))"
+"0","plot(20:80,pWage,type = ""l"",lwd=1,col='blue',xlab = 'Age',ylab='Wage')"

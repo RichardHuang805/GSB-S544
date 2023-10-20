@@ -1,0 +1,285 @@
+---
+title: "Machine Learning Lab 2"
+format: html
+editor: visual
+output: html_document
+theme: darkly
+self-contained: true
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+**0. Import the data and declare your package dependencies.**
+
+```{python}
+import numpy as np
+import pandas as pd
+import plotnine as p9
+```
+
+```{python}
+myData = pd.read_csv('/Users/richardhuang/Desktop/GSB-S544/Machine_Learning/avocado-updated-2020.csv')
+```
+
+```{python}
+myData
+```
+
+**1. Briefly describe the data set. What information does it contain?**
+
+-   `Date` - The date of the observation
+
+-   `AveragePrice` - the average price of a single avocado
+
+-   `type` - conventional or organic
+
+-   `year` - the year
+
+-   `Region` - the city or region of the observation
+
+-   `Total Volume` - Total number of avocados sold
+
+-   `4046` - Total number of avocados with PLU 4046 sold
+
+-   `4225` - Total number of avocados with PLU 4225 sold
+
+-   `4770` - Total number of avocados with PLU 4770 sold
+
+It basically describes avocado's prices and how they are sold. Besides the variables I listed above, it also has information regarding the bags that it is sold in.
+
+**2. Clean the data in any way you see fit.**
+
+```{python}
+Major_geo = myData[myData['geography'].isin(['West', 'Midsouth', 'Northeast', 'South Central', 'Southeast', 'Plains'])]
+Noncity = ['West', 'Midsouth', 'Northeast', 'South Central', 'Southeast', 'Plains','South Carolina','Total U.S.','West Tex/New Mexioco','Northern New England','California','Great Lakes']
+Major_city=myData[~myData['geography'].isin(Noncity)]
+
+```
+
+```{python}
+Major_city
+Major_geo
+```
+
+**3. Which major geographical region sold the most total organic, small Hass avocados in 2017?**
+
+```{python}
+question_three = Major_geo[Major_geo["year"] == 2017]
+question_three = question_three[question_three['type']=='organic']
+sales_by_year = question_three.groupby('geography')['4046'].sum().reset_index()
+sales_by_year
+
+```
+
+West has the highest sales for **organic, small Hass avocados in 2017.**
+
+**4. Split the `date` variable into month, day, and year variables. In which month is the highest average volume of avocado sales?**
+
+```{python}
+myData[['year', 'month', 'day']] = myData['date'].str.split('-', n=2, expand=True)
+
+
+myData
+```
+
+```{python}
+sales_by_month = myData.groupby('month')['total_volume'].mean().reset_index()
+sorted_data =sales_by_month.sort_values(by='total_volume')
+sorted_data
+
+```
+
+May has highest average.
+
+**5. Which metro area geographical regions sold the most total avocados? Plot side-by-side box-plots of the total volume for only the five metro geographical regions with the highest averages for the `total_volume` variable.**
+
+```{python}
+Major_city
+```
+
+```{python}
+sales_by_city = Major_city.groupby('geography')['total_volume'].sum().reset_index()
+sorted_city =sales_by_city.sort_values(by='total_volume')
+sorted_city
+
+
+```
+
+Los Angeles sold the most avocados.
+
+```{python}
+top_five_city = myData[myData['geography'].isin(['Los Angeles', 'New York', 'Dallas/Ft. Worth', 'Houston', 'Phoenix/Tucson'])]
+
+top_five_city
+```
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 50))
+sns.boxplot(x="geography", y="total_volume", data=top_five_city)
+plt.xlabel("Geography")
+plt.ylabel("Total Volume")
+plt.title("Box Plot of Total Volume by Geography")
+plt.xticks(rotation=10)
+plt.show()
+```
+
+The following four California geographical regions are in this data set: `"Los Angeles"`, `"San Diego"`, `"Sacramento"`, and `"San Francisco"`.
+
+**6. From your cleaned data set, create a data set with only these California regions and answer the following questions about these California regions only.**
+
+```{python}
+California = myData[myData['geography'].isin(['Los Angeles', 'San Diego', 'Sacramento', 'San Francisco'])]
+California
+```
+
+**7. In which California regions is the price of organic versus conventional avocados most different? Support your answer with a few summary statistics AND a visualization.**
+
+**Tip**
+
+You do not have to, but you may want to transform your data. Sketch out what you want the data set to look like before you begin to code! Come up with a game plan to answer this question.
+
+```{python}
+California.loc[:, 'average_price'] = California['average_price'].astype(int)
+```
+
+```{python}
+import pandas as pd
+grouped = California.groupby(['type', 'geography'])['average_price'].mean().reset_index()
+pivot_table = grouped.pivot(index='geography', columns='type', values='average_price')
+pivot_table['difference'] = pivot_table['organic'] - pivot_table['conventional']
+pivot_table.reset_index(inplace=True)
+
+
+pivot_table
+```
+
+```{python}
+grouped.describe()
+```
+
+```{python}
+from plotnine import ggplot, geom_point, aes, geom_boxplot, geom_bar
+gg=(ggplot(pivot_table,
+aes(
+  x = "geography",
+  y = "difference"
+))
++ geom_bar(stat='identity')
+)
+```
+
+San Francisco has the highest difference price of 0.67, while San Diego has the second most difference price of 0.56. On the other hand, Sacramento has the lowest difference between organic and conventional.
+
+**8. The following plot shows, for all four California regions, the proportion of the average Hass avocado sales that are small, large, or extra large; conventional vs. organic. Recreate the plot; you do not have to replicate the exact finishing touches - e.g., color, theme - but your plot should resemble the content of this plot.**
+
+```{python}
+California
+```
+
+```{python}
+Cali = California.groupby(['type', 'geography','4770','4225','4046'])['average_price'].sum().reset_index()
+Cali
+```
+
+```{python}
+long_Cali = Cali.melt(id_vars=["geography", "type"], value_vars= ['4770','4225','4046'],var_name="size", value_name="count")
+```
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from plotnine import facet_wrap, geom_col
+(ggplot(long_Cali,
+aes(
+x = "geography", y ='count',
+  fill = 'size'
+))
++ geom_col(position = "fill")
++ facet_wrap("type")
+)
+
+
+```
+
+#My size is upside down.
+
+# **Using Outside Data**
+
+A joke in the media is that Millennials can\'t afford houses, because they spend all their money buying avocado toast. Let\'s use this data set to address that claim.
+
+#Randomly generating a house_price data frame based on different cities:
+
+```{python}
+import pandas as pd
+import random
+
+
+cities = ['Los Angeles', 'San Diego', 'Sacramento', 'San Francisco']
+
+data = []
+
+for _ in range(100):
+
+    city = random.choice(cities)  # Randomly select a city from the list
+    
+    house_price = random.randint(300000, 1000000)  
+    data.append({'geography': city, 'house_price': house_price})
+
+house_prices_df = pd.DataFrame(data)
+
+print(house_prices_df)
+
+```
+
+```{python}
+House = house_prices_df.groupby(['geography'])['house_price'].mean().reset_index()
+House
+```
+
+```{python}
+avo = Cali.groupby(['geography'])['average_price'].mean().reset_index()
+avo
+```
+
+```{python}
+final = avo.merge(House, on=["geography"])
+final
+```
+
+```{python}
+from plotnine import facet_wrap, geom_col, ggplot,aes,geom_bar
+(ggplot(final, aes(x = "geography", y = "average_price", fill = "geography"))
++ geom_bar(stat='identity')
+)
+
+
+```
+
+```{python}
+from plotnine import facet_wrap, geom_col, ggplot,aes,geom_bar
+(ggplot(final, aes(x = "geography", y = "house_price", fill = "geography"))
++ geom_bar(stat='identity')
+)
+```
+
+To argue about "Millennials can\'t afford houses, because they spend all their money buying avocado toast", I made two graphs: one desribes the average price of avocado based on the four different cities, the other one describes the average house price based on the four different cities.
+
+If it's true that Millennials spend all their money buying avocado toast, we can interprete that the average prices of avocado in a city is too high. Meanwhile, the average prices of house in a city is relatively low. (Since people can't afford it, real estate will set it to a lower price. If people can afford it and they have been buying it, the prices of house should be high. Supply/Demand relationship).
+
+Relatively speaking, SF has the highest avocado price, and it also happens to have the lowest house price, which fits my interpretation in the previous paragraph. Therefore, it is true for Millennials in SF that they can\'t afford houses, because they spend all their money buying avocado toast.
+
+On the other hand, LA is in the opposite position. They have the lowest avocado prices but a relatively high house price, indicating that when avocado are cheap, people are buying more houses.

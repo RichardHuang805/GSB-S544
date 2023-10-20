@@ -1,0 +1,48 @@
+"0","sales_by_city = Major_city.groupby('geography')['total_volume'].sum().reset_index()"
+"0","sorted_city =sales_by_city.sort_values(by='total_volume')"
+"0","sorted_city"
+"1","               geography  total_volume
+40              Syracuse  2.412871e+07
+3                  Boise  3.035955e+07
+38               Spokane  3.078100e+07
+0                 Albany  3.481634e+07
+21            Louisville  3.489267e+07
+29            Pittsburgh  4.109569e+07
+5      Buffalo/Rochester  5.120092e+07
+33               Roanoke  5.517729e+07
+13          Grand Rapids  5.896980e+07
+18          Jacksonville  6.220746e+07
+39             St. Louis  6.316405e+07
+9               Columbus  6.593675e+07
+17          Indianapolis  6.640588e+07
+23             Nashville  7.745375e+07
+6              Charlotte  8.128127e+07
+32      Richmond/Norfolk  9.124998e+07
+8      Cincinnati/Dayton  9.273281e+07
+14   Harrisburg/Scranton  9.397640e+07
+24    New Orleans/Mobile  9.466657e+07
+15  Hartford/Springfield  1.046050e+08
+31    Raleigh/Greensboro  1.079793e+08
+19             Las Vegas  1.088508e+08
+26               Orlando  1.359013e+08
+12               Detroit  1.400228e+08
+41                 Tampa  1.486281e+08
+34            Sacramento  1.492713e+08
+27          Philadelphia  1.584327e+08
+35             San Diego  1.737644e+08
+1                Atlanta  1.989941e+08
+37               Seattle  2.024026e+08
+4                 Boston  2.041325e+08
+30              Portland  2.135438e+08
+22  Miami/Ft. Lauderdale  2.317448e+08
+7                Chicago  2.576650e+08
+36         San Francisco  2.742169e+08
+2   Baltimore/Washington  2.767646e+08
+11                Denver  2.779295e+08
+42   West Tex/New Mexico  2.806116e+08
+28        Phoenix/Tucson  3.825234e+08
+16               Houston  4.208438e+08
+10      Dallas/Ft. Worth  4.362042e+08
+25              New York  5.282452e+08
+20           Los Angeles  9.593505e+08
+"

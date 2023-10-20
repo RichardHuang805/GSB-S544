@@ -1,0 +1,4 @@
+"0","library(readxl)"
+"0","myData<-read_excel(""/Users/richardhuang/Desktop/econometric/Data for Weeks 1-7.xlsx"", sheet = 'College')"
+"0","options(scipen=999)"
+"0","myData"

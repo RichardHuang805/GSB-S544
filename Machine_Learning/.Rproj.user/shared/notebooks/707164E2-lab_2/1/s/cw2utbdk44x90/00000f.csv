@@ -1,0 +1,5 @@
+"0","Major_geo = myData[myData['geography'].isin(['West', 'Midsouth', 'Northeast', 'South Central', 'Southeast', 'Plains'])]"
+"0","Noncity = ['West', 'Midsouth', 'Northeast', 'South Central', 'Southeast', 'Plains','South Carolina','Total U.S.','West Tex/New Mexioco','Northern New England','California','Great Lakes']"
+"0","Major_city=myData[~myData['geography'].isin(Noncity)]"
+"0",""
+"0",""

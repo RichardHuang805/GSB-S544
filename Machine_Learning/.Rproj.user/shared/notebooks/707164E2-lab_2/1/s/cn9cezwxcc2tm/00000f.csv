@@ -1,0 +1,18 @@
+"0","sales_by_month = myData.groupby('month')['total_volume'].mean().reset_index()"
+"0","sorted_data =sales_by_month.sort_values(by='total_volume')"
+"0","sorted_data"
+"1","   month  total_volume
+11    12  8.076695e+05
+10    11  8.223470e+05
+9     10  8.446863e+05
+8     09  9.064773e+05
+7     08  9.499249e+05
+6     07  9.832681e+05
+0     01  9.853122e+05
+2     03  9.957150e+05
+3     04  1.016582e+06
+5     06  1.051247e+06
+1     02  1.095374e+06
+4     05  1.123632e+06
+"
+"0",""

@@ -1,0 +1,12 @@
+"0","question_three = Major_geo[Major_geo[""year""] == 2017]"
+"0","question_three = question_three[question_three['type']=='organic']"
+"0","sales_by_year = question_three.groupby('geography')['4046'].sum().reset_index()"
+"0","sales_by_year"
+"1","       geography        4046
+0       Midsouth   186395.50
+1      Northeast   925832.36
+2         Plains   168583.40
+3  South Central  1717104.19
+4      Southeast   285124.34
+5           West  1870206.29
+"

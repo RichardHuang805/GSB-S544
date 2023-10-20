@@ -1,0 +1,2 @@
+"0","California.loc[:, 'average_price'] = California['average_price'].astype(int)"
+"0",""

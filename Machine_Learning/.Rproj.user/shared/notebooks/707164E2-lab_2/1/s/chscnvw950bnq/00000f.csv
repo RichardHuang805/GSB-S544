@@ -1,0 +1,35 @@
+"0","import pandas as pd"
+"0","import random"
+"0",""
+"0",""
+"0","cities = ['Los Angeles', 'San Diego', 'Sacramento', 'San Francisco']"
+"0",""
+"0","data = []"
+"0",""
+"0","for _ in range(100):"
+"0","    "
+"0","    city = random.choice(cities)  # Randomly select a city from the list"
+"0","    "
+"0","    house_price = random.randint(300000, 1000000)  "
+"0","    data.append({'geography': city, 'house_price': house_price})"
+"0","    "
+"0","house_prices_df = pd.DataFrame(data)"
+"0",""
+"0","print(house_prices_df)"
+"0",""
+"0",""
+"1","        geography  house_price
+0      Sacramento       713643
+1       San Diego       778716
+2   San Francisco       491720
+3     Los Angeles       381921
+4      Sacramento       326824
+..            ...          ...
+95    Los Angeles       529329
+96  San Francisco       718712
+97     Sacramento       693679
+98    Los Angeles       330390
+99     Sacramento       441472
+
+[100 rows x 2 columns]
+"

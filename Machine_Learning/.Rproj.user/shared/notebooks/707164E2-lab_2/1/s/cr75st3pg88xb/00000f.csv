@@ -1,0 +1,8 @@
+"0","avo = Cali.groupby(['geography'])['average_price'].mean().reset_index()"
+"0","avo"
+"1","       geography  average_price
+0    Los Angeles       0.837705
+1     Sacramento       1.127869
+2      San Diego       0.977049
+3  San Francisco       1.277049
+"

@@ -1,0 +1,23 @@
+"0","import seaborn as sns"
+"0","import matplotlib.pyplot as plt"
+"0",""
+"0","plt.figure(figsize=(10, 50))"
+"1","<Figure size 1000x5000 with 0 Axes>
+"
+"0","sns.boxplot(x=""geography"", y=""total_volume"", data=top_five_city)"
+"1","<Axes: xlabel='geography', ylabel='total_volume'>
+"
+"0","plt.xlabel(""Geography"")"
+"1","Text(0.5, 0, 'Geography')
+"
+"0","plt.ylabel(""Total Volume"")"
+"1","Text(0, 0.5, 'Total Volume')
+"
+"0","plt.title(""Box Plot of Total Volume by Geography"")"
+"1","Text(0.5, 1.0, 'Box Plot of Total Volume by Geography')
+"
+"0","plt.xticks(rotation=10)"
+"1","([0, 1, 2, 3, 4], [Text(0, 0, 'Dallas/Ft. Worth'), Text(1, 0, 'Houston'), Text(2, 0, 'Los Angeles'), Text(3, 0, 'New York'), Text(4, 0, 'Phoenix/Tucson')])
+"
+"0","plt.show()"
+"0",""

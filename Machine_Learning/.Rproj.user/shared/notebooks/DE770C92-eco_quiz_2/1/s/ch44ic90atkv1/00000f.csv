@@ -1,0 +1,6 @@
+"0","plogRent4 <- predict(Model4)"
+"0","pRent4 <- exp(plogRent4 + se4^2/2)"
+"0","cor(myData$Rent, pRent4)^2"
+"2","Warning: Unknown or uninitialised column: `Rent`."
+"2","Error in cor(myData$Rent, pRent4) : 'x' must be numeric
+"

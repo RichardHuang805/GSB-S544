@@ -1,0 +1,6 @@
+"0","from plotnine import facet_wrap, geom_col, ggplot,aes,geom_bar"
+"0","(ggplot(final, aes(x = ""geography"", y = ""house_price"", fill = ""geography""))"
+"0","+ geom_bar(stat='identity')"
+"0",")"
+"1","<Figure Size: (649 x 401)>
+"

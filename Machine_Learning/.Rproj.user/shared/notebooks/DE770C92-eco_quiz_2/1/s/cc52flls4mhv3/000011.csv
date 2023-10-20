@@ -1,0 +1,8 @@
+"0","se2 <- sigma(Model2)"
+"0","plogSalary2 <- predict(Model2)"
+"0","pSalary2 <- exp(plogSalary2 + se2^2/2)"
+"0","cor(myData$Salary, pSalary2)^2"
+"1","[1]"
+"1"," 0.3720395"
+"1","
+"

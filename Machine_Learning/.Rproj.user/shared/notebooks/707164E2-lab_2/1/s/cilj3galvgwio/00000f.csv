@@ -1,0 +1,8 @@
+"0","House = house_prices_df.groupby(['geography'])['house_price'].mean().reset_index()"
+"0","House"
+"1","       geography    house_price
+0    Los Angeles  656605.482759
+1     Sacramento  697012.185185
+2      San Diego  652583.863636
+3  San Francisco  586475.818182
+"

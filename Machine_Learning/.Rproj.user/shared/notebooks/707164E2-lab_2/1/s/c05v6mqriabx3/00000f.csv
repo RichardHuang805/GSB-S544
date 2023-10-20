@@ -1,0 +1,14 @@
+"0","import pandas as pd"
+"0","grouped = California.groupby(['type', 'geography'])['average_price'].mean().reset_index()"
+"0","pivot_table = grouped.pivot(index='geography', columns='type', values='average_price')"
+"0","pivot_table['difference'] = pivot_table['organic'] - pivot_table['conventional']"
+"0","pivot_table.reset_index(inplace=True)"
+"0",""
+"0",""
+"0","pivot_table"
+"1","type      geography  conventional   organic  difference
+0       Los Angeles      0.571895  1.098039    0.526144
+1        Sacramento      0.944444  1.303922    0.359477
+2         San Diego      0.696078  1.251634    0.555556
+3     San Francisco      0.937908  1.607843    0.669935
+"

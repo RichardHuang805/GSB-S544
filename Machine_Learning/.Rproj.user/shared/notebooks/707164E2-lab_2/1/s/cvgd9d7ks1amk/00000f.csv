@@ -1,0 +1,8 @@
+"0","final = avo.merge(House, on=[""geography""])"
+"0","final"
+"1","       geography  average_price    house_price
+0    Los Angeles       0.837705  656605.482759
+1     Sacramento       1.127869  697012.185185
+2      San Diego       0.977049  652583.863636
+3  San Francisco       1.277049  586475.818182
+"

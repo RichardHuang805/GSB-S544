@@ -1,0 +1,7 @@
+"0","exp(predict(Model3,data.frame(Female = 1, Certificates = 3, Age=51.36)))"
+"1","       1 "
+"1","
+"
+"1","73441.72 "
+"1","
+"

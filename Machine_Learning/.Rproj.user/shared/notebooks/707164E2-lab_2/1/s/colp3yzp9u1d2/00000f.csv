@@ -1,0 +1,17 @@
+"0","California = myData[myData['geography'].isin(['Los Angeles', 'San Diego', 'Sacramento', 'San Francisco'])]"
+"0","California"
+"1","             date  average_price  total_volume  ...      geography  month  day
+44     2015-01-04           0.85    2682159.95  ...    Los Angeles     01   04
+45     2015-01-04           1.25      54495.54  ...    Los Angeles     01   04
+80     2015-01-04           1.05     430138.88  ...     Sacramento     01   04
+81     2015-01-04           1.33       9213.49  ...     Sacramento     01   04
+82     2015-01-04           0.94     461607.33  ...      San Diego     01   04
+...           ...            ...           ...  ...            ...    ...  ...
+33018  2020-11-29           1.43      23531.38  ...     Sacramento     11   29
+33019  2020-11-29           1.12     469356.72  ...      San Diego     11   29
+33020  2020-11-29           1.95      25799.95  ...      San Diego     11   29
+33021  2020-11-29           1.50     644141.37  ...  San Francisco     11   29
+33022  2020-11-29           1.87      59527.02  ...  San Francisco     11   29
+
+[2448 rows x 15 columns]
+"
